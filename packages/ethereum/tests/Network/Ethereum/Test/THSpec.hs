@@ -6,7 +6,7 @@
 {-# LANGUAGE QuasiQuotes           #-}
 module Network.Ethereum.Test.THSpec where
 
-import           Data.Tuple.OneTuple (OneTuple(..))
+import           Data.Tuple.Solo (Solo(..))
 import           Network.Ethereum.Contract.TH
 import           Test.Hspec
 
@@ -23,5 +23,5 @@ spec = parallel $
       True `shouldBe` True
 
     it "can compile single field structs" $ do
-      let _ = SingleFieldFunctionData (OneTuple 123)
+      let _ = SingleFieldFunctionData (Solo 123)
       True `shouldBe` True

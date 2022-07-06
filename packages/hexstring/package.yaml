@@ -13,7 +13,7 @@ category:            Network
 dependencies:
 - base                 >4.11 && <4.15
 - text                 >1.2  && <1.3
-- aeson                >1.2  && <1.6
+- aeson                >=2.0 && <2.1
 - memory               >0.14 && <0.16
 - bytestring           >0.10 && <0.11
 - template-haskell     >2.11 && <2.17

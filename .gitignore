@@ -5,3 +5,4 @@ build/
 dist/
 docs/_build
 stack.yaml.lock
+dist-newstyle/

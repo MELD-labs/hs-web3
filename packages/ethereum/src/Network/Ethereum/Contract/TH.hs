@@ -57,7 +57,7 @@ import           Data.Text                        (Text)
 import qualified Data.Text                        as T
 import qualified Data.Text.Lazy                   as LT
 import qualified Data.Text.Lazy.Encoding          as LT
-import           Data.Tuple.OneTuple              (OneTuple, only)
+import           Data.Tuple.Solo                  (Solo, getSolo)
 import           Generics.SOP                     (Generic)
 import qualified GHC.Generics                     as GHC (Generic)
 import           Language.Haskell.TH
@@ -121,7 +121,7 @@ toHSType s = case s of
     SolidityString      -> conT ''Text
     SolidityBytesN n    -> appT (conT ''BytesN) (numLit n)
     SolidityBytes       -> conT ''Bytes
-    SolidityTuple [a]   -> appT (conT ''OneTuple) (toHSType a)
+    SolidityTuple [a]   -> appT (conT ''Solo) (toHSType a)
     SolidityTuple as    -> foldl ( \b a -> appT b $ toHSType a ) ( tupleT (length as) ) as
     SolidityVector ns a -> expandVector ns a
     SolidityArray a     -> appT listT $ toHSType a
@@ -185,7 +185,7 @@ funWrapper c name dname args result = do
             |]
       , if c
             then funD' name (varP <$> vars) $ case result of
-                    Just [_] -> [|only <$> call $(params)|]
+                    Just [_] -> [|getSolo <$> call $(params)|]
                     _        -> [|call $(params)|]
             else funD' name (varP <$> vars) $ [|send $(params)|]
       ]

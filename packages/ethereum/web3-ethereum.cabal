@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.34.6.
+-- This file has been generated from package.yaml by hpack version 0.34.4.
 --
 -- see: https://github.com/sol/hpack
 
@@ -56,8 +56,8 @@ library
       src
   ghc-options: -funbox-strict-fields -Wduplicate-exports -Whi-shadowing -Widentities -Woverlapping-patterns -Wpartial-type-signatures -Wunrecognised-pragmas -Wtyped-holes -Wincomplete-patterns -Wincomplete-uni-patterns -Wmissing-fields -Wmissing-methods -Wmissing-exported-signatures -Wmissing-monadfail-instances -Wmissing-signatures -Wname-shadowing -Wunused-binds -Wunused-top-binds -Wunused-local-binds -Wunused-pattern-binds -Wunused-imports -Wunused-matches -Wunused-foralls -Wtabs
   build-depends:
-      OneTuple >0.2 && <0.3
-    , aeson >1.2 && <1.6
+      OneTuple >0.3 && <0.4
+    , aeson ==2.0.*
     , base >4.11 && <4.15
     , bytestring >0.10 && <0.11
     , data-default >0.7 && <0.8
@@ -68,7 +68,7 @@ library
     , memory >0.14 && <0.16
     , memory-hexstring ==1.0.*
     , microlens >0.4 && <0.5
-    , microlens-aeson >2.2 && <2.4
+    , microlens-aeson ==2.5.*
     , mtl >2.2 && <2.3
     , relapse >=1.0 && <2.0
     , tagged >0.8 && <0.9
@@ -120,8 +120,8 @@ test-suite tests
       src
   ghc-options: -funbox-strict-fields -Wduplicate-exports -Whi-shadowing -Widentities -Woverlapping-patterns -Wpartial-type-signatures -Wunrecognised-pragmas -Wtyped-holes -Wincomplete-patterns -Wincomplete-uni-patterns -Wmissing-fields -Wmissing-methods -Wmissing-exported-signatures -Wmissing-monadfail-instances -Wmissing-signatures -Wname-shadowing -Wunused-binds -Wunused-top-binds -Wunused-local-binds -Wunused-pattern-binds -Wunused-imports -Wunused-matches -Wunused-foralls -Wtabs -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      OneTuple >0.2 && <0.3
-    , aeson >1.2 && <1.6
+      OneTuple >0.3 && <0.4
+    , aeson ==2.0.*
     , base >4.11 && <4.15
     , bytestring >0.10 && <0.11
     , data-default >0.7 && <0.8
@@ -136,7 +136,7 @@ test-suite tests
     , memory >0.14 && <0.16
     , memory-hexstring ==1.0.*
     , microlens >0.4 && <0.5
-    , microlens-aeson >2.2 && <2.4
+    , microlens-aeson ==2.5.*
     , mtl >2.2 && <2.3
     , relapse >=1.0 && <2.0
     , tagged >0.8 && <0.9

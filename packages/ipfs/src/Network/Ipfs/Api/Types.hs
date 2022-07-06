@@ -21,9 +21,9 @@ module Network.Ipfs.Api.Types where
 import           Control.Arrow              (left)
 import           Control.Monad
 import           Data.Aeson
+import qualified Data.Aeson.KeyMap          as A
 import           Data.ByteString.Lazy       (toStrict)
 import qualified Data.ByteString.Lazy.Char8 ()
-import qualified Data.HashMap.Strict        as H
 import           Data.Int
 import           Data.Text                  (Text)
 import qualified Data.Text.Encoding         as TextS
@@ -536,12 +536,12 @@ instance FromJSON ObjectObj where
 
 instance FromJSON ObjectLinksObj where
     parseJSON (Object v) =
-        case H.lookup "Links" v of
+        case A.lookup "Links" v of
             Just (_) -> WithLinks <$> v .: "Hash"
                                   <*> v .: "Links"
 
             Nothing ->
-                case H.lookup "Hash" v of
+                case A.lookup "Hash" v of
                       Just (_) -> WithoutLinks <$> v .: "Hash"
                       Nothing  -> mzero
 
@@ -588,12 +588,12 @@ instance FromJSON ObjectDiffObj where
 
 instance FromJSON PinObj where
     parseJSON (Object v) =
-        case H.lookup "Progress" v of
+        case A.lookup "Progress" v of
             Just (_) -> WithProgress <$> v .: "Pins"
                                      <*> v .: "Progress"
 
             Nothing ->
-                case H.lookup "Pins" v of
+                case A.lookup "Pins" v of
                       Just (_) -> WithoutProgress <$> v .: "Pins"
                       Nothing  -> mzero
 

@@ -8,7 +8,7 @@ module Data.Solidity.Test.EncodingSpec where
 
 import           Control.Exception          (evaluate)
 import           Data.Text                  (Text)
-import           Data.Tuple.OneTuple        (OneTuple (..))
+import           Data.Tuple.Solo            (Solo (..))
 import           Generics.SOP               (Generic, Rep)
 import           Test.Hspec
 
@@ -148,7 +148,7 @@ tuplesTest =
        in roundTripGeneric decoded encoded
 
     it "can encode 1-tuples with dynamic arg" $ do
-      let decoded = OneTuple ([True, False] :: [Bool])
+      let decoded = Solo ([True, False] :: [Bool])
           encoded = "0x0000000000000000000000000000000000000000000000000000000000000020"
                  <> "0x0000000000000000000000000000000000000000000000000000000000000002"
                  <> "0x0000000000000000000000000000000000000000000000000000000000000001"
