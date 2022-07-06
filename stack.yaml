@@ -1,5 +1,5 @@
 # Resolver to choose a 'specific' stackage snapshot or a compiler version.
-resolver: lts-18.23
+resolver: lts-18.28
 
 # User packages to be built.
 packages:
@@ -21,6 +21,10 @@ packages:
 # Extra package dependencies
 extra-deps:
 - animalcase-0.1.0.2@sha256:d7b80c3130c68d7ce8ddd9782588b2c4dd7da86461f302c54cc4acddf0902b51
+- aeson-2.0.3.0@sha256:510c59bece9c6b3d9e999674b869c765cdc3df9f9f90b6871df3e62f87b12fff,5867
+- microlens-aeson-2.5.0@sha256:41e1d15643a4214eb28e32e1295cdb1a5703e79bdc79b7b35d3e918d56295939,1533
+- OneTuple-0.3.1@sha256:a848c096c9d29e82ffdd30a9998aa2931cbccb3a1bc137539d80f6174d31603e,2262
+- semialign-1.2.0.1@sha256:2ab22ab4f7e67028a745e549ae49f1ddecbd83e62d7e6ecce4ab0685410da536,2836
 
 # Dependencies bounds
 pvp-bounds: both
@@ -31,3 +35,5 @@ nix:
     - haskellPackages.stylish-haskell
     - haskellPackages.hlint
     - zlib
+
+allow-newer: true
