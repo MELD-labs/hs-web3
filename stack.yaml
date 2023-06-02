@@ -1,5 +1,5 @@
 # Resolver to choose a 'specific' stackage snapshot or a compiler version.
-resolver: lts-19.21
+resolver: lts-20.23
 
 # User packages to be built.
 packages:
@@ -32,3 +32,5 @@ nix:
     - haskellPackages.stylish-haskell
     - haskellPackages.hlint
     - zlib
+
+allow-newer: true
