@@ -15,16 +15,16 @@ extra-source-files:
 - src/cbits/xxhash.c
 
 dependencies:
-- base                 >4.11 && <4.16
-- text                 >1.2  && <1.3
-- aeson                >1.2  && <2.2
-- memory               >0.14 && <0.17
-- vector               >0.12 && <0.13
-- containers           >0.6  && <0.7
-- uuid-types           >1.0  && <1.1
-- cryptonite           >0.22 && <0.30
-- bytestring           >0.10 && <0.11
-- memory-hexstring     >=1.0 && <1.1
+- base
+- text
+- aeson
+- memory
+- vector
+- containers
+- uuid-types
+- cryptonite
+- bytestring
+- memory-hexstring
 
 ghc-options:
 - -funbox-strict-fields
