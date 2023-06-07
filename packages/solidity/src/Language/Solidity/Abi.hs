@@ -123,6 +123,7 @@ data Declaration = DConstructor
     { falPayable :: Bool
     -- ^ Fallback function
     }
+    | DReceive
     deriving Show
 
 instance Eq Declaration where
@@ -131,6 +132,7 @@ instance Eq Declaration where
     (DEvent a _ _) == (DEvent b _ _) = a == b
     (DError a _) == (DError b _) = a == b
     (DFallback _) == (DFallback _) = True
+    DReceive == DReceive = True
     (==) _ _ = False
 
 instance Ord Declaration where
@@ -139,36 +141,49 @@ instance Ord Declaration where
     compare (DEvent a _ _) (DEvent b _ _) = compare a b
     compare (DError a _) (DError b _) = compare a b
     compare (DFallback _) (DFallback _) = EQ
+    compare DReceive DReceive = EQ
 
     compare DConstructor {} DFunction {} = LT
     compare DConstructor {} DEvent {} = LT
     compare DConstructor {} DError {} = LT
     compare DConstructor {} DFallback {} = LT
+    compare DConstructor {} DReceive = LT
 
     compare DFunction {} DConstructor {} = GT
     compare DFunction {} DEvent {} = LT
     compare DFunction {} DError {} = LT
     compare DFunction {} DFallback {} = LT
+    compare DFunction {} DReceive = LT
 
     compare DEvent {} DConstructor {} = GT
     compare DEvent {} DFunction {} = GT
     compare DEvent {} DError {} = LT
     compare DEvent {} DFallback {} = LT
+    compare DEvent {} DReceive = LT
 
     compare DError {} DConstructor {} = GT
     compare DError {} DFunction {} = GT
     compare DError {} DEvent {} = GT
     compare DError {} DFallback {} = LT
+    compare DError {} DReceive = LT
 
     compare DFallback {} DConstructor {} = GT
     compare DFallback {} DFunction {} = GT
     compare DFallback {} DEvent {} = GT
     compare DFallback {} DError {} = GT
+    compare DFallback {} DReceive = LT
+
+    compare DReceive {} DConstructor {} = GT
+    compare DReceive {} DFunction {} = GT
+    compare DReceive {} DEvent {} = GT
+    compare DReceive {} DError {} = GT
+    compare DReceive {} DFallback {} = GT
 
 instance FromJSON Declaration where
   parseJSON = withObject "Declaration" $ \o -> do
     t :: Text <- o .: "type"
     case t of
+      "receive" -> pure DReceive
       "fallback" -> DFallback <$> o .: "payable"
       "constructor" -> DConstructor <$> o .: "inputs"
       "event" -> DEvent <$> o .: "name" <*> o .: "inputs" <*> o .: "anonymous"
@@ -238,6 +253,7 @@ signature :: Declaration -> Text
 
 signature (DConstructor inputs) = "(" <> funArgs inputs <> ")"
 signature (DFallback _) = "()"
+signature DReceive = "()"
 signature (DFunction name _ inputs _) = name <> "(" <> funArgs inputs <> ")"
 signature (DError name inputs) = name <> "(" <> funArgs inputs <> ")"
 signature (DEvent name inputs _) = name <> "(" <> args inputs <> ")"
