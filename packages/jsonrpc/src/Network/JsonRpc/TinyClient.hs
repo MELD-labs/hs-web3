@@ -68,7 +68,7 @@ import           Control.Monad.Catch     (MonadThrow (..))
 import           Control.Monad.IO.Class  (MonadIO (..))
 import           Control.Monad.State     (MonadState, get)
 import           Data.Aeson              (FromJSON (..), Result(Error, Success), ToJSON (..),
-                                          Value (String), eitherDecode, encode, fromJSON,
+                                          Value (String), eitherDecode', encode, fromJSON,
                                           object, withObject, (.:), (.:?), (.=))
 import           Data.ByteString.Lazy    (ByteString)
 import           Data.Text               (Text, unpack)
@@ -211,7 +211,7 @@ decodeResponse :: (MonadThrow m, FromJSON a)
                -> m a
 decodeResponse = (tryParse . fromResult . fromJSON)
                <=< tryResult . rsResult
-               <=< tryParse . eitherDecode
+               <=< tryParse . eitherDecode'
   where
     fromResult (Success a) = Right a
     fromResult (Error e) = Left e
